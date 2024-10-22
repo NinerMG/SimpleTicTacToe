@@ -4,9 +4,9 @@ public class Main {
 
         System.out.println("Hello world!");
 
-        String input = "O_OXXO_XX";
+        String input = "XO_XO_XOX";
 
-        Grid grid = new Grid(input);
+        new Grid(input);
     }
 
 }
