@@ -4,6 +4,9 @@ public class Grid {
 
     public Grid(String input){
         gridDrawFromInput(stringInputToGrid(input));
+        GameAnalyze gameAnalyze = new GameAnalyze();
+        gameAnalyze.gameAnalyze(grid);
+
     }
 
     private char[] stringInputToGrid(String inputString){
