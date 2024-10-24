@@ -1,14 +1,25 @@
 public class Grid {
 
     public char[][] grid = new char[3][3];
+    private static Grid instance;
 
-    public Grid(String input){
-        gridDrawFromInput(stringInputToGrid(input));
-        GameAnalyze gameAnalyze = new GameAnalyze();
-        gameAnalyze.gameAnalyze(grid);
-
+    public static Grid getInstance(String input) {
+        if (instance == null) {
+            synchronized (Grid.class) {
+                if (instance == null) {
+                    instance = new Grid(input);
+                }
+            }
+        }
+        return instance;
     }
 
+    private Grid(String input){
+        gridDrawFromInput(stringInputToGrid(input));
+        //GameAnalyze gameAnalyze = new GameAnalyze();
+        //gameAnalyze.gameAnalyze(grid);
+
+    }
     private char[] stringInputToGrid(String inputString){
         return inputString.toCharArray();
     }
