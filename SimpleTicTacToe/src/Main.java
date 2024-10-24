@@ -2,13 +2,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //String input = "_OOOO_X_X";
+        String input = "_XXOO_OX_";
 
-        //new Grid(input);
-        UserInput userInput = new UserInput();
-        userInput.inputNumbers();
+        new UserInput(input);
 
-        //Grid grid = Grid.getInstance("X_X_O____");
     }
 
 }

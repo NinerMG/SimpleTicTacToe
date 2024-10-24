@@ -4,11 +4,12 @@ public class UserInput {
 
     int x;
     int y;
+    Grid grid; //grid 3x3
 
-    public void inputNumbers() {
-        Grid grid = Grid.getInstance("X_X_O____");
+    public UserInput(String input){
+        grid = Grid.getInstance(input);
         readNumbers();
-        displayNumbers();
+        placeMark();
     }
 
     private void readNumbers() {
@@ -18,7 +19,7 @@ public class UserInput {
             String input = scanner.nextLine();
             String[] parts = input.split(" ");
             if (parseNumbers(parts)) {
-                if (isValidCoordinates(x)) {
+                if (isValidCoordinates(x) || isValidCoordinates(y)) {
                     break;
                 } else {
                     System.out.println("Coordinates should be from 1 to 3!");
@@ -39,14 +40,32 @@ public class UserInput {
             System.out.println("You should enter two numbers!");
             return false;
         }
+
     }
     private boolean isValidCoordinates(int value) {
         return value > 0 && value < 4;
     }
-    private void displayNumbers() {
-        System.out.println("Your number is: " + x);
-        System.out.println("Second number is: " + y);
+
+    private void updateCoordinates(){
+        x -=1;
+        y -=1;
     }
 
+    private void placeMark(){
+        updateCoordinates();
+        if (isPlaceValid()) {
+            System.out.println("This cell is occupied! Choose another one!");
+            readNumbers();
+            placeMark();
+        } else {
+            grid.grid[x][y] = 'X';
+            grid.gridDraw();
+        }
+    }
+
+    private boolean isPlaceValid(){
+        return  (grid.grid[x][y] == 'X' || grid.grid[x][y] == 'O');
+
+    }
 
 }

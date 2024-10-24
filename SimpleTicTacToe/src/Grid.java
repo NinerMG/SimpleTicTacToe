@@ -26,11 +26,15 @@ public class Grid {
 
     private void gridDrawFromInput(char[] inputChar){
       fillGridWithInput(inputChar);
-      drawBorder();
-      for (int i = 0; i < grid.length; i++) {
-          drawRow(i);
-      }
-      drawBorder();
+      gridDraw();
+    }
+
+    public void gridDraw(){
+        drawBorder();
+        for(int i = 0; i < grid.length; i++){
+            drawRow(i);
+        }
+        drawBorder();
     }
 
     private void fillGridWithInput(char[] inputChar){
