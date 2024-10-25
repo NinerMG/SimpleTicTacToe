@@ -1,32 +1,24 @@
+import java.util.Arrays;
+
 public class Grid {
 
     public char[][] grid = new char[3][3];
     private static Grid instance;
 
-    public static Grid getInstance(String input) {
+    public static Grid getInstance() {
         if (instance == null) {
             synchronized (Grid.class) {
                 if (instance == null) {
-                    instance = new Grid(input);
+                    instance = new Grid();
                 }
             }
         }
         return instance;
     }
 
-    private Grid(String input){
-        gridDrawFromInput(stringInputToGrid(input));
-        //GameAnalyze gameAnalyze = new GameAnalyze();
-        //gameAnalyze.gameAnalyze(grid);
-
-    }
-    private char[] stringInputToGrid(String inputString){
-        return inputString.toCharArray();
-    }
-
-    private void gridDrawFromInput(char[] inputChar){
-      fillGridWithInput(inputChar);
-      gridDraw();
+    private Grid(){
+        fillGridWithInput();
+        gridDraw();
     }
 
     public void gridDraw(){
@@ -37,14 +29,9 @@ public class Grid {
         drawBorder();
     }
 
-    private void fillGridWithInput(char[] inputChar){
-        int charSpot = 0;
-
-        for(int i = 0; i < grid.length; i++){
-            for (int j = 0; j < grid[i].length; j++){
-                grid[i][j] = inputChar[charSpot];
-                charSpot++;
-            }
+    private void fillGridWithInput(){
+        for (char[] chars : grid) {
+            Arrays.fill(chars, ' ');
         }
     }
     private void drawRow(int rowIndex){

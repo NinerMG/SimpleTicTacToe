@@ -4,12 +4,17 @@ public class UserInput {
 
     int x;
     int y;
-    Grid grid; //grid 3x3
+    Grid grid;
 
-    public UserInput(String input){
-        grid = Grid.getInstance(input);
+    public UserInput(){
+        grid = Grid.getInstance();
         readNumbers();
-        placeMark();
+        placeMark('X');
+    }
+
+    public void userLoop(char mark){
+        readNumbers();
+        placeMark(mark);
     }
 
     private void readNumbers() {
@@ -19,7 +24,7 @@ public class UserInput {
             String input = scanner.nextLine();
             String[] parts = input.split(" ");
             if (parseNumbers(parts)) {
-                if (isValidCoordinates(x) || isValidCoordinates(y)) {
+                if (isValidCoordinates(x) && isValidCoordinates(y)) {
                     break;
                 } else {
                     System.out.println("Coordinates should be from 1 to 3!");
@@ -51,14 +56,14 @@ public class UserInput {
         y -=1;
     }
 
-    private void placeMark(){
+    private void placeMark(char mark){
         updateCoordinates();
         if (isPlaceValid()) {
             System.out.println("This cell is occupied! Choose another one!");
             readNumbers();
-            placeMark();
+            placeMark(mark);
         } else {
-            grid.grid[x][y] = 'X';
+            grid.grid[x][y] = mark;
             grid.gridDraw();
         }
     }

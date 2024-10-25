@@ -1,24 +1,28 @@
 public class GameAnalyze {
 
 
-    public void gameAnalyze(char[][] grid) {
-      analyze(grid);
-
+    public boolean gameAnalyze(char[][] grid) {
+     return analyzeGameOver(grid);
     }
 
-    private void analyze(char[][] grid){
+    private boolean analyzeGameOver(char[][] grid){
 
         if (!isValidGrid(grid)) {
             System.out.println("Impossible");
+            return true;
         }else if(isWin(grid, 'X')){
             System.out.println("X wins");
+            return true;
         } else if (isWin(grid, 'O')){
             System.out.println("O wins");
+            return true;
         } else if (countMarks(grid) == 9) {
             System.out.println("Draw");
-        } else if (!isGridFilled(grid)){
-            System.out.println("Game not finished");
+            return true;
+        } else {
+            return false;
         }
+
     }
 
 
